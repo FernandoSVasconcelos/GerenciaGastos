@@ -6,6 +6,48 @@ class Contas:
         self.produto = input("Produto: ")
         self.preco = float(input("Preço: "))
 
+def setConta():
+    conta = Contas()
+    os.system("clear")
+    arquivoPreco = open("preço" + conta.mes + conta.ano + ".txt", "a")
+    arquivoProduto = open("produto" + conta.mes + conta.ano + ".txt", "a")
+
+    arquivoPreco.write(str(conta.preco) + '\n')
+    arquivoProduto.write(str(conta.produto) + '\n')
+
+    arquivoPreco.close()
+    arquivoProduto.close()
+
+def getConta():
+    os.system("clear")
+    print('-------------Digite o mês e o ano da conta------------')
+    ano = input("Ano: ")
+    mes = input("Mês: ")
+    os.system("clear")
+
+    try:
+        arquivoPreco = open("preço" + mes + ano + ".txt", "r")
+        arquivoProduto = open("produto" + mes + ano + ".txt", "r")
+    except:
+        print("O mês de", mes, "não possui contas cadastradas")
+
+    print("---------------------------------------------------")
+    print("Mês:", mes)
+    print("Ano:", ano)
+    print("---------------------------------------------------")
+    total = 0
+    for lines in arquivoPreco:
+        preco = float(lines)
+        print(arquivoProduto.readline(), end='')
+        print("R$", preco)
+        total += preco  
+    print("---------------------------------------------------")
+    print("Total: R$", total)
+    print("---------------------------------------------------")
+
+    arquivoProduto.close()
+    arquivoPreco.close()
+
 def menu():
     print('[*] SELECIONE UMA OPÇÃO PARA CONTINUAR')
     print('[1] Cadastrar gasto')
@@ -14,47 +56,9 @@ def menu():
     print("---------------------------------------------------")
     menu = input('Seleção: ')
     if(menu == '1'):
-        conta = Contas()
-        os.system("clear")
-        arquivoPreco = open("preço" + conta.mes + conta.ano + ".txt", "a")
-        arquivoProduto = open("produto" + conta.mes + conta.ano + ".txt", "a")
-
-        arquivoPreco.write(str(conta.preco) + '\n')
-        arquivoProduto.write(str(conta.produto) + '\n')
-
-        arquivoPreco.close()
-        arquivoProduto.close()
-
+        setConta()
     elif(menu == '2'):
-        os.system("clear")
-        print('-------------Digite o mês e o ano da conta------------')
-        ano = input("Ano: ")
-        mes = input("Mês: ")
-        os.system("clear")
-
-        try:
-            arquivoPreco = open("preço" + mes + ano + ".txt", "r")
-            arquivoProduto = open("produto" + mes + ano + ".txt", "r")
-        except:
-            print("O mês de", mes, "não possui contas cadastradas")
-
-        print("---------------------------------------------------")
-        print("Mês:", mes)
-        print("Ano:", ano)
-        print("---------------------------------------------------")
-        total = 0
-        for lines in arquivoPreco:
-            preco = float(lines)
-            print(arquivoProduto.readline(), end='')
-            print("R$", preco)
-            total += preco  
-        print("---------------------------------------------------")
-        print("Total: R$", total)
-        print("---------------------------------------------------")
-
-        arquivoProduto.close()
-        arquivoPreco.close()
-    
+        getConta()
     else:
         exit()
 
