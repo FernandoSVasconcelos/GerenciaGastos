@@ -4,3 +4,7 @@ ifood
 ifood
 ifood
 uber
+almoço
+ube
+Mercado
+uber
