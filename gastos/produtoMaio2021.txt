@@ -8,3 +8,6 @@ almoço
 ube
 Mercado
 uber
+Uber
+ifood
+rodoviária
